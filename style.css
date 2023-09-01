@@ -1,16 +1,74 @@
-h1 {
-  text-align: center;
-}
-
-img {
-  width: 90%;
-  margin: 20px auto;
-  border-radius: 20px;
-  display: block;
-}
-
-.contact-btn {
+.container {
+  width: 650px;
+  height: 700px;
+  border: 3px solid black;
   display: block;
   margin: 0 auto;
-  width: 200px;
+}
+
+.searchArea {
+  display: block auto;
+  margin-top: 10px;
+  margin-left: 100px;
+  justify-content: space-between;
+  align-items: center;
+}
+.locationSearch,
+.livelocation {
+  margin-left: 10px;
+}
+.currentWeatherIcon {
+  width: 150px;
+  height: 150px;
+  display: block;
+  margin: 0 auto;
+}
+h1,
+h2 {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+.temp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.temp a {
+  margin-left: 5px;
+  float: left;
+  font-size: 15px;
+}
+
+.fahrenheit {
+  margin-left: 10px;
+  float: left;
+}
+
+.description,
+.time,
+.currentDay {
+  font-weight: bold;
+}
+
+.locationSearch,
+.livelocation {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.locationSearch:hover,
+.livelocation:hover {
+  background-color: #0056b3;
+}
+
+.locationSearch {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.livelocation {
+  background-color: #28a745;
+  color: #fff;
 }
