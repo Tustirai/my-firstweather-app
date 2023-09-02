@@ -23,6 +23,13 @@ function updateLocation(response) {
   iconElement.setAttribute("alt", response.data.condition.icon);
 }
 
+function displayFahrenheitTemp(event) {
+  event.preventDefault();
+  let FahrenheitTemperature = (14 * 9) / 5 + 32;
+  let tempElement = document.querySelector("#mainTemp");
+  tempElement.innerHTML = Math.round(FahrenheitTemperature);
+}
+
 let locationButton = document.querySelector("#location-search-button");
 locationButton.addEventListener("click", function () {
   let query = document.querySelector("#location-search").value;
@@ -84,3 +91,6 @@ let currentMonth = months[date.getMonth()];
 document.querySelector(
   "#liveMonth"
 ).innerHTML = `${currentDate}, ${currentMonth}`;
+
+let fahrenheit = document.querySelector("#fahrenheitLink");
+fahrenheit.addEventListener("click", displayFahrenheitTemp);
