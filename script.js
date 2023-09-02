@@ -4,15 +4,14 @@ function updateLocation(response) {
   document.querySelector("h1").innerHTML = response.data.name;
 
   let temperature = Math.round(response.data.main.temp);
-  console.log(`${temperature}°C`);
   document.querySelector(".temp").innerHTML = `${temperature}°C`;
 
   document.querySelector("#liveDescription").innerHTML =
-    response.data.weather[0].main;
+    response.data.weather[0].description;
 
   document.querySelector(
     "#liveHumidity"
-  ).innerHTML = `Humidity: ${response.data.main.humidity}`;
+  ).innerHTML = `Humidity: ${response.data.main.humidity}%`;
   document.querySelector(
     "#liveWind"
   ).innerHTML = `Wind: ${response.data.wind.speed} km/h`;
