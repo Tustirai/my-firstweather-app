@@ -1,10 +1,11 @@
 function updateLocation(response) {
   let query = document.querySelector("#location-search").value;
-  document.querySelector("h1").innerHTML = query;
+  console.log(response.data);
   document.querySelector("h1").innerHTML = response.data.city;
 
   let temperature = Math.round(response.data.temperature.current);
-  document.querySelector(".temp").innerHTML = `${temperature}°C`;
+  console.log(response.data.temperature.current);
+  document.querySelector(".temp").innerHTML = `${temperature}`;
 
   document.querySelector("#liveDescription").innerHTML =
     response.data.condition.description;
@@ -23,13 +24,6 @@ function updateLocation(response) {
   iconElement.setAttribute("alt", response.data.condition.icon);
 }
 
-function displayFahrenheitTemp(event) {
-  event.preventDefault();
-  let FahrenheitTemperature = (14 * 9) / 5 + 32;
-  let tempElement = document.querySelector("#mainTemp");
-  tempElement.innerHTML = Math.round(FahrenheitTemperature);
-}
-
 let locationButton = document.querySelector("#location-search-button");
 locationButton.addEventListener("click", function () {
   let query = document.querySelector("#location-search").value;
@@ -39,6 +33,22 @@ locationButton.addEventListener("click", function () {
   axios.get(apiUrl).then(updateLocation);
 });
 
+function convertTemp(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#mainTemp");
+  let degreeElement = document.querySelector("#degreeLink");
+  let currentTemp = parseFloat(tempElement.innerHTML);
+  let currentUnit = degreeElement.textContent;
+  if (currentUnit === "℃") {
+    let fahrenheitTemp = (currentTemp * 9) / 5 + 32;
+    tempElement.innerHTML = Math.round(fahrenheitTemp);
+    degreeElement.textContent = "℉";
+  } else {
+    let celsiusTemp = ((currentTemp - 32) * 5) / 9;
+    tempElement.innerHTML = Math.round(celsiusTemp);
+    degreeElement.textContent = "℃";
+  }
+}
 let livelocation = document.querySelector(".livelocation");
 livelocation.addEventListener("click", function () {
   navigator.geolocation.getCurrentPosition(function (position) {
@@ -93,4 +103,7 @@ document.querySelector(
 ).innerHTML = `${currentDate}, ${currentMonth}`;
 
 let fahrenheit = document.querySelector("#fahrenheitLink");
-fahrenheit.addEventListener("click", displayFahrenheitTemp);
+fahrenheit.addEventListener("click", convertTemp);
+
+let degree = document.querySelector("#degreeLink");
+degree.addEventListener("click", convertTemp);
