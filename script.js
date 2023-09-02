@@ -2,7 +2,6 @@ function updateLocation(response) {
   let query = document.querySelector("#location-search").value;
   document.querySelector("h1").innerHTML = query;
   document.querySelector("h1").innerHTML = response.data.city;
-  console.log(response.data);
 
   let temperature = Math.round(response.data.temperature.current);
   document.querySelector(".temp").innerHTML = `${temperature}°C`;
@@ -16,6 +15,12 @@ function updateLocation(response) {
   document.querySelector(
     "#liveWind"
   ).innerHTML = `Wind: ${response.data.wind.speed} km/h`;
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
+  );
+  iconElement.setAttribute("alt", response.data.condition.icon);
 }
 
 let locationButton = document.querySelector("#location-search-button");
