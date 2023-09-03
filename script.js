@@ -1,6 +1,4 @@
 function updateLocation(response) {
-  let query = document.querySelector("#location-search").value;
-  console.log(response.data);
   document.querySelector("h1").innerHTML = response.data.city;
 
   let temperature = Math.round(response.data.temperature.current);
@@ -23,7 +21,7 @@ function updateLocation(response) {
   );
   iconElement.setAttribute("alt", response.data.condition.icon);
 
-  displayForecast();
+  getForecast();
 }
 
 let locationButton = document.querySelector("#location-search-button");
@@ -52,8 +50,21 @@ function convertTemp(event) {
   }
 }
 
-function displayForecast() {
+function getForecast() {
+  navigator.geolocation.getCurrentPosition(function (position) {
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+    let key = "9ca6fftf31a653429384425b05bobb8e";
+    let units = "metric";
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${key}&units=${units}`;
+    axios.get(apiUrl).then(displayForecast);
+  });
+}
+function displayForecast(response) {
+  console.log(response.data.daily);
+
   let forecastElement = document.querySelector("#forecast");
+
   let forecastDays = [" Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
 
   let forecastHTML = `<div class="row">`;
