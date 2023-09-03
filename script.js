@@ -22,6 +22,8 @@ function updateLocation(response) {
     `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
   );
   iconElement.setAttribute("alt", response.data.condition.icon);
+
+  displayForecast();
 }
 
 let locationButton = document.querySelector("#location-search-button");
@@ -49,6 +51,37 @@ function convertTemp(event) {
     degreeElement.textContent = "℃";
   }
 }
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastDays = [" Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+
+  let forecastHTML = `<div class="row">`;
+  forecastDays.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+        <div class="col-md-2">
+          <div class="card">
+            <img
+              class="card-img-top"
+              src="src/images/icons8-snow.gif"
+              alt="Card image cap"
+              id="forecastIcon"
+            />
+            <div class="card-body">
+              <h5 class="card-title" id="weatherForecastDay">${day}</h5>
+              <p class="card-text" id="forecastTemp">25°</p>
+            </div>
+          </div>
+        </div>
+      `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 let livelocation = document.querySelector(".livelocation");
 livelocation.addEventListener("click", function () {
   navigator.geolocation.getCurrentPosition(function (position) {

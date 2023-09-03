@@ -99,3 +99,8 @@ h1 {
 .liveDescription {
   text-transform: capitalize;
 }
+.weatherForecast {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
