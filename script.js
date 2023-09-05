@@ -32,15 +32,6 @@ function updateLocation(response) {
   getForecast();
 }
 
-let locationButton = document.querySelector("#location-search-button");
-locationButton.addEventListener("click", function () {
-  let query = document.querySelector("#location-search").value;
-  let key = "9ca6fftf31a653429384425b05bobb8e";
-  let units = "metric";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${query}&key=${key}&units=${units}`;
-  axios.get(apiUrl).then(updateLocation);
-});
-
 function convertTemp(event) {
   event.preventDefault();
   let tempElement = document.querySelector("#mainTemp");
@@ -68,6 +59,7 @@ function getForecast() {
     axios.get(apiUrl).then(displayForecast);
   });
 }
+
 function displayForecast(response) {
   let forecast = response.data.daily;
 
@@ -118,6 +110,15 @@ livelocation.addEventListener("click", function () {
   });
 });
 
+let locationButton = document.querySelector("#location-search-button");
+locationButton.addEventListener("click", function () {
+  let query = document.querySelector("#location-search").value;
+  let key = "9ca6fftf31a653429384425b05bobb8e";
+  let units = "metric";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${query}&key=${key}&units=${units}`;
+  axios.get(apiUrl).then(updateLocation);
+});
+
 let date = new Date();
 let hours = date.getHours();
 let minutes = date.getMinutes();
@@ -164,3 +165,14 @@ fahrenheit.addEventListener("click", convertTemp);
 
 let degree = document.querySelector("#degreeLink");
 degree.addEventListener("click", convertTemp);
+
+function showJohannesburg() {
+  let query = "Johannesburg";
+  let key = "9ca6fftf31a653429384425b05bobb8e";
+  let units = "metric";
+  let url = `https://api.shecodes.io/weather/v1/current?query=${query}&key=${key}&units=${units}`;
+
+  axios.get(url).then(updateLocation);
+}
+
+showJohannesburg();
